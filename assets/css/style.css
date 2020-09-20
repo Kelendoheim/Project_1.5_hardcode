@@ -1,0 +1,54 @@
+.mainDiv {
+  text-align: center;
+}
+
+.showingToday {
+  text-align: center;
+  color: #fed174;
+  font-family: mySecondFont;
+  padding: .3em;
+  margin: auto;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(fonts/BungeeShade-Regular.ttf)
+}
+
+@font-face {
+  font-family: mySecondFont;
+  src: url(fonts/RialtoNF.ttf)
+}
+
+.header-style {
+  font-family: myFirstFont;
+  font-style: italic;
+  font-weight: bolder;
+  font-size: 2.5em;
+}
+
+.titleBtn,
+.theaterBtn,
+.restaurantBtn,
+.endPage {
+  text-align: initial;
+  color: beige;
+  background-color: transparent;
+  display: flex;
+  font-size: x-large;
+  font-style: italic;
+  padding: 2px;
+  margin: auto;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
