@@ -192,21 +192,43 @@ $(document).on("click", ".restaurantBtn", function (event) {
     console.log(selectedRestaurantName);
     var filmEl = $("<h6>");
     var finalFilm = $("<div>");
+    var ptag = $("<p>");
+    var posterEl = $("<img>")
     finalFilm.attr("class", "card endPage");
-    finalFilm.text("You're seeing: " + selectedFilmName);
+    finalFilm.text("You're seeing the film " + selectedFilmName);
+    posterEl.attr("src", selectedPoster)
+    ptag.text(selectedSynopsis);
     filmEl.append(finalFilm);
+    filmEl.append(ptag);
+    filmEl.append(posterEl)
+
     x;
     var cinEl = $("<h6>");
     var finalCin = $("<div>");
+    var cinAddressEl = $("<p>");
     finalCin.attr("class", "card endPage");
     finalCin.text("Playing at " + selectedTheaterName);
+    cinAddressEl.text(selectedAddress)
     cinEl.append(finalCin);
+    cinEl.append(cinAddressEl);
     x;
     var restEl = $("<h6>");
     var finalRest = $("<div>");
+    var restaurantLinkEl = $("<a>");
+    var restaurantImageEl = $("<img>");
+    var restaurantDistanceEl = $("<p>");
+    var selectedDistanceMile = selectedRestaurantDistance * 0.000621
+    var milesAway = selectedDistanceMile.toFixed(1);
     finalRest.attr("class", "card endPage");
     finalRest.text("Enjoy your dinner at " + selectedRestaurantName + "!");
+    restaurantLinkEl.attr("href", selectedRestaurantURL)
+    restaurantLinkEl.text(selectedRestaurantName)
+    restaurantImageEl.attr("src", selectedRestaurantImage)
+    restaurantDistanceEl.text(selectedRestaurantName + " is " + milesAway + " miles away from " + selectedTheaterName + ".")
     restEl.append(finalRest);
+    restEl.append(restaurantLinkEl)
+    restEl.append(restaurantDistanceEl)
+    restEl.append(restaurantImageEl)
     titleListEl.append(filmEl, cinEl, restEl);
     console.log(selectedPoster);
     console.log(selectedSynopsis);
