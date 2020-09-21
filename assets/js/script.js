@@ -35,6 +35,8 @@ var selectedTheaterName = "";
 var selectedRestaurantName = "";
 var currentLat = "";
 var currentLong = "";
+var gifSearchArray = [];
+var gifSearchTerm = "";
 // var filmSettings = {
 //     url: cors + "https://api-gate2.movieglu.com/filmsNowShowing/?",
 //     method: "GET",
@@ -160,6 +162,7 @@ $(document).on("click", ".theaterBtn", function (event) {
             restaurantDistanceArray.push(yelpResponse.businesses[i].distance);
             restaurantImageArray.push(yelpResponse.businesses[i].image_url);
             restaurantURLArray.push(yelpResponse.businesses[i].url);
+            gifSearchArray.push(yelpResponse.businesses[i].categories[0].title)
            
         }
         console.log(restaurantArray);
@@ -181,6 +184,7 @@ $(document).on("click", ".restaurantBtn", function (event) {
     selectedRestaurantDistance = restaurantDistanceArray[$(event.target).attr("id")];
     selectedRestaurantImage = restaurantImageArray[$(event.target).attr("id")];
     selectedRestaurantURL = restaurantURLArray[$(event.target).attr("id")];
+    gifSearchTerm = gifSearchArray[$(event.target).attr("id")]
     console.log(selectedRestaurantDistance);
     console.log(selectedRestaurantImage);
     console.log(selectedRestaurantURL);
@@ -230,10 +234,22 @@ $(document).on("click", ".restaurantBtn", function (event) {
     restEl.append(restaurantDistanceEl)
     restEl.append(restaurantImageEl)
     titleListEl.append(filmEl, cinEl, restEl);
-    console.log(selectedPoster);
-    console.log(selectedSynopsis);
-    console.log(selectedAddress);
-    console.log(selectedRestaurantDistance);
-    console.log(selectedRestaurantImage);
-    console.log(selectedRestaurantURL);
+    console.log(gifSearchArray)
+    console.log(gifSearchTerm)
+
+
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ak87nOygtVllL2jPMqmROa14LnUstKRN&q=" + gifSearchTerm;
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      console.log(response.data[0].images.original.url);
+      var gifEl = $("img").attr("src", response.data[0].images.original.url);
+      restEl.append(gifEl)
+    });
 });
+
+
