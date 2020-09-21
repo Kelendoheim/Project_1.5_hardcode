@@ -199,9 +199,10 @@ $(document).on("click", ".restaurantBtn", function (event) {
     var ptag = $("<p>");
     var posterEl = $("<img>")
     finalFilm.attr("class", "card endPage");
-    finalFilm.text("You're seeing the film " + selectedFilmName);
     posterEl.attr("src", selectedPoster)
+    posterEl.attr("class", "poster");
     ptag.text(selectedSynopsis);
+    ptag.attr("class", "synopsis")
     filmEl.append(finalFilm);
     filmEl.append(ptag);
     filmEl.append(posterEl)
@@ -210,11 +211,13 @@ $(document).on("click", ".restaurantBtn", function (event) {
     var cinEl = $("<h6>");
     var finalCin = $("<div>");
     var cinAddressEl = $("<p>");
-    finalCin.attr("class", "card endPage");
-    finalCin.text("Playing at " + selectedTheaterName);
+    // finalCin.attr("class", "card endPage");
+    // finalCin.text("Playing at " + selectedTheaterName);
     cinAddressEl.text(selectedAddress)
+    finalFilm.text("You're seeing " + selectedFilmName + ", playing at " + selectedTheaterName);
+    cinAddressEl.text("(Address: " + selectedAddress);
     cinEl.append(finalCin);
-    cinEl.append(cinAddressEl);
+
     x;
     var restEl = $("<h6>");
     var finalRest = $("<div>");
@@ -226,8 +229,10 @@ $(document).on("click", ".restaurantBtn", function (event) {
     finalRest.attr("class", "card endPage");
     finalRest.text("Enjoy your dinner at " + selectedRestaurantName + "!");
     restaurantLinkEl.attr("href", selectedRestaurantURL)
-    restaurantLinkEl.text(selectedRestaurantName)
+    restaurantLinkEl.text("Yelp page: " + selectedRestaurantName)
     restaurantImageEl.attr("src", selectedRestaurantImage)
+    restaurantImageEl.attr("class", "restImg")
+    restaurantDistanceEl.attr("class", "distance");
     restaurantDistanceEl.text(selectedRestaurantName + " is " + milesAway + " miles away from " + selectedTheaterName + ".")
     restEl.append(finalRest);
     restEl.append(restaurantLinkEl)
