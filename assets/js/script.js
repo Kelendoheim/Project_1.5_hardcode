@@ -1,5 +1,7 @@
+// the next two vars are being declared so that they can be dynamically manipulated via the DOM
 var titleListEl = $("#titleList");
 var headlinEl = $("#headline");
+// the following 8 vars are used to dynamically populate the page with data from the first ajax call. Unfortunately, some of this had to be hard coded in this version but should work seamlessly when they are emptied and the ajax call has a new api key.
 var titleArray = ["Tenet", "The Nest", "About Endlessness", "Alone", "The Secrets We Keep", "Infidel"];
 var buttonIdArray = [];
 var titlePosterArray = ["assets/images/tenet.jpg", "assets/images/TheNest.jpg", "assets/images/AboutEndlessness.jpg", "assets/images/Alone.png", "assets/images/thesecrets.jpg", "assets/images/infidel.jpg"];
@@ -8,6 +10,7 @@ var titleTrailerArray = [];
 var selectedPoster = "";
 var selectedSynopsis = "";
 var selectedTrailer = "";
+// the following 11 vars are being used to generate the page from the second API call, when it works. Currently only the hardcoded arrays and their corresponding empty strings are being used.
 var cinemaArray = ["AMC Theatre", "Midtown Art Cinema", "AMC Phillips Plaza 14", "AMC DINE-IN Buckhead 6", "Alliance Theatre"];
 var cinemaAddressArray = ["3101 Cobb Pkwy SE", "931 Monroe Dr NE", "3500 Peachtree Rd NE", "3340 Peachtree Rd NE", "1280 Peachtree St NE"];
 var cinemaCityArray = [];
@@ -19,6 +22,7 @@ var selectedCity = "";
 var selectedState = "";
 var selectedZip = "";
 var selectedDistance = "";
+// the following 9 vars are being used to gether data from the third, and thankfully working, ajax call and then populating the page and setting data values to be got from a for loop. Only the lat and long of the cinema need hardcoding at this point.
 var restaurantArray = [];
 var cinemaLatArray = ["33.753746", "33.753746", "33.753746", "33.753746", "33.753746"];
 var cinemaLongArray = ["-84.386330", "-84.386330", "-84.386330", "-84.386330", "-84.386330"];
@@ -28,15 +32,20 @@ var restaurantURLArray = [];
 var selectedRestaurantDistance = "";
 var selectedRestaurantImage = "";
 var selectedRestaurantURL = "";
+// var cors is being used to avoid a cors error when testing the page locally
 var cors = "https://cors-anywhere.herokuapp.com/";
+// the following var is using moment.js to store the current time in the format necessary for the ajax calls
 var currentTime = moment().format("YYYY-MM-DDTHH:mm:ss") + "Z";
+// the following five empty strings are being used to store the users choices and then display them at the time of our final page population
 var selectedFilmName = "";
 var selectedTheaterName = "";
 var selectedRestaurantName = "";
 var currentLat = "";
 var currentLong = "";
-var gifSearchArray = [];
-var gifSearchTerm = "";
+
+// the following ajax and the for loop inside it have been commmented out and the arrays it will populate have been hard coded until a new api key is available, at which point the hardcoded arrays should be emptied and it should work perfectly
+
+
 // var filmSettings = {
 //     url: cors + "https://api-gate2.movieglu.com/filmsNowShowing/?",
 //     method: "GET",
@@ -61,7 +70,8 @@ var gifSearchTerm = "";
     //     titleTrailerArray.push(response.films[i].film_trailer)
        
     // }
-    
+
+    //the following for loop will dynamically populate the page with the film names gathered from the first api call 
     for (i = 0; i < titleArray.length; i++) {
         var listEl = $("<h6>");
         var titleButtonEl = $("<button>");
@@ -74,7 +84,9 @@ var gifSearchTerm = "";
     }
 // });
 
-// console.log(currentTime)
+
+
+// the following event listener willempty the div and set the values of multiple vars relating to the selected film, including a movie poster and plot synopsis
 
 $(document).on("click", ".titleBtn", function (event) {
     selectedFilmName = $(event.target).text();
@@ -85,6 +97,9 @@ $(document).on("click", ".titleBtn", function (event) {
     selectedPoster = titlePosterArray[$(event.target).attr("id")]
     selectedSynopsis = titleSynopsisArray[$(event.target).attr("id")]
     selectedTrailer = titleTrailerArray[$(event.target).attr("id")]
+
+
+    // the following ajax and the for loop inside it have been commmented out and the arrays it will populate have been hard coded until a new api key is available, at which point the hardcoded arrays should be emptied and it should work perfectly
 
 
     // var closestSettings = {
@@ -117,6 +132,8 @@ $(document).on("click", ".titleBtn", function (event) {
         //     cinemaDistanceArray.push(response.cinemas[i].distance);
         // }
        
+
+        //the following for loop will populate the page with the nearby cinemas that are showing the selected film.
         for (i = 0; i < cinemaArray.length; i++) {
             var listEl = $("<h6>");
             var titleButtonEl = $("<button>");
@@ -130,9 +147,12 @@ $(document).on("click", ".titleBtn", function (event) {
     // });
 });
 
+
+// the following event listener will empty the div and set the values of multiple vars related to the selected cinema
 $(document).on("click", ".theaterBtn", function (event) {
     titleListEl.empty();
     headlinEl.text("Nearest Restaurants");
+    console.log("test")
     selectedTheaterId = cinemaLatArray[$(event.target).attr("id")] + "," + cinemaLongArray[$(event.target).attr("id")];
     selectedTheaterName = $(event.target).text();
     selectedAddress = cinemaAddressArray[$(event.target).attr("id")]
@@ -154,7 +174,7 @@ $(document).on("click", ".theaterBtn", function (event) {
                 "Bearer qItHfBqMcXSXkVpMIcSF71I2KbHwRJ-rxNbzAQGIHcPc-OHxM0V-xAedcHX55dgcgoxi_VEKSgbC9RBnQjdAqDQDgvbo_lENXqYxeGhD6GV_KLJHPCKKYznDY1diX3Yx",
         },
     };
-
+        // the following ajax call will gather data from the yelp fusion api and store that data in empty arrays. Those values will be iterated over in a for loop and store restaurant data to be gathered in the last page display
     $.ajax(yelpSettings).done(function (yelpResponse) {
         console.log(yelpResponse);
         for (i = 0; i < 10; i++) {
@@ -179,6 +199,7 @@ $(document).on("click", ".theaterBtn", function (event) {
     });
 });
 
+// this final event listener will empty the div and then populate the page with the user selections as well as stored data relating to each selection
 $(document).on("click", ".restaurantBtn", function (event) {
     selectedRestaurantName = $(event.target).text();
     selectedRestaurantDistance = restaurantDistanceArray[$(event.target).attr("id")];
@@ -244,17 +265,7 @@ $(document).on("click", ".restaurantBtn", function (event) {
 
 
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=ak87nOygtVllL2jPMqmROa14LnUstKRN&q=" + gifSearchTerm;
 
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function(response) {
-      console.log(response);
-      console.log(response.data[0].images.original.url);
-      var gifEl = $("img").attr("src", response.data[0].images.original.url);
-      restEl.append(gifEl)
-    });
 });
 
 
