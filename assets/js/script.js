@@ -182,7 +182,6 @@ $(document).on("click", ".theaterBtn", function (event) {
             restaurantDistanceArray.push(yelpResponse.businesses[i].distance);
             restaurantImageArray.push(yelpResponse.businesses[i].image_url);
             restaurantURLArray.push(yelpResponse.businesses[i].url);
-            gifSearchArray.push(yelpResponse.businesses[i].categories[0].title)
            
         }
         console.log(restaurantArray);
@@ -205,7 +204,6 @@ $(document).on("click", ".restaurantBtn", function (event) {
     selectedRestaurantDistance = restaurantDistanceArray[$(event.target).attr("id")];
     selectedRestaurantImage = restaurantImageArray[$(event.target).attr("id")];
     selectedRestaurantURL = restaurantURLArray[$(event.target).attr("id")];
-    gifSearchTerm = gifSearchArray[$(event.target).attr("id")]
     console.log(selectedRestaurantDistance);
     console.log(selectedRestaurantImage);
     console.log(selectedRestaurantURL);
@@ -260,8 +258,6 @@ $(document).on("click", ".restaurantBtn", function (event) {
     restEl.append(restaurantDistanceEl)
     restEl.append(restaurantImageEl)
     titleListEl.append(filmEl, cinEl, restEl);
-    console.log(gifSearchArray)
-    console.log(gifSearchTerm)
 
 
 
